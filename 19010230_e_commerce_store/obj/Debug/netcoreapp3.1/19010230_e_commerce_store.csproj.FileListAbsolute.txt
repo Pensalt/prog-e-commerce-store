@@ -171,3 +171,9 @@ C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\
 C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\19010230_e_commerce_store.csproj.CoreCompileInputs.cache
 C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\19010230_e_commerce_store.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Details.cshtml.g.cs
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Login.cshtml.g.cs
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Signup.cshtml.g.cs
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\ProductCategories\Details.cshtml.g.cs
+C:\Users\callu\source\repos\19010230_e_commerce_store\19010230_e_commerce_store\obj\Debug\netcoreapp3.1\Razor\Views\ProductCategories\Index.cshtml.g.cs

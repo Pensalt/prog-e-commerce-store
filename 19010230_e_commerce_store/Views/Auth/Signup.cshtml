@@ -1,0 +1,34 @@
+﻿<br />
+<br />
+<br />
+<div class="text-center card">
+    <h1>Sign Up</h1>
+    <form action="Auth/CreateAccount" method="post" class="text-center">
+        <br />
+        <div class="container">
+            <input class="text-center, form-control-lg" type="email" placeholder="Enter email" name="email" required />
+        </div>
+        <br />
+        <div class="container">
+            <input class="text-center, form-control-lg" type="password" placeholder="Enter password" name="password" required />
+        </div>
+        <br />
+        <div class="container">
+            <button class="rounded, form-control-lg" type="submit">Sign Up</button>
+        </div>
+        <br />
+    </form>
+    <br />
+    <div class="text-center">
+        <p>Already have an account?</p>
+        <p><b><a href="@Url.Action("Login","Auth")">Login</a></b></p>
+    </div>
+    <br />
+</div>
+<br />
+<div class="text-center">
+    <p style="color:red"><b>@ViewBag.alreadyExists</b></p> @*This might be a bad security feature*@
+</div>
+<div class="text-center">
+    <p style="color:red"><b>@ViewBag.error</b></p>
+</div>

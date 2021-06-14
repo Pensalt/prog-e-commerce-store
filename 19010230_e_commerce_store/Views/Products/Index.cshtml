@@ -4,62 +4,86 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Available Products</h1>
+    <h1>Available Products</h1>
 
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
+    @*<form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Index">Back to Full List</a>
+                </p>
+            </div>
+        </form>*@
+
+    <form asp-controller="Products" asp-action="Index">
         <p>
-            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            Search For Product: <input type="search" name="SearchString">
+            <input type="submit" value="search" />
         </p>
-    </div>
-</form>
+    </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDescription)
-            </td>
-            <td>
-                R @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                <img src="@Url.Content(item.ProductImage)" width="100" height="100" alt="Image" /> @* Shows the item image *@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                @*<a asp-action="put name here" asp-route="">Add to Cart</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card">
+        <table class="table" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Showcase
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDescription)
+                        </td>
+                        <td>
+                            R @Html.DisplayFor(modelItem => item.ProductPrice)
+                        </td>
+                        <td>
+                            <img src="@Url.Content(item.ProductImage)" width="100" height="100" alt="Image" /> @* Shows the item image *@
+                        </td>
+                        <td>
+                            <a asp-action="Checkout" asp-route-id="@item.ProductId">Checkout</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+<style>
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        max-width: none;
+    }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            border-color: black;
+        }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+    }
+</style>

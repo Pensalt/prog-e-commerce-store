@@ -1,3 +1,18 @@
-﻿@{
-    Layout = "_Layout";
+﻿
+@*The following code has been attributed from:
+@Sarina Till
+@https://stackoverflow.com/questions/32512169/change-layout-based-on-type-of-user-role/32512887 Author: NightOwl888
+@http://aspsolution.net/Code/5/5160/Access-session-variable-in-razor-view-ASPNET-CORE/ *@
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor;
+
+@if (!(HttpContextAccessor.HttpContext.Session.GetInt32("accessLevel") is null) && HttpContextAccessor.HttpContext.Session.GetInt32("accessLevel") == 1)
+{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+

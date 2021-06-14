@@ -9,6 +9,7 @@ using _19010230_e_commerce_store.Models;
 
 namespace _19010230_e_commerce_store.Controllers
 {
+    // The home page is just a landing page. This code is all auto generated.
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

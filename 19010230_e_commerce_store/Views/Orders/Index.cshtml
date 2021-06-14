@@ -1,0 +1,81 @@
+﻿@model IEnumerable<_19010230_e_commerce_store.Models.OrderInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor;
+
+<h1>Purchase History</h1>
+<p>Your account: @HttpContextAccessor.HttpContext.Session.GetString("currentUser")</p>
+
+
+<div class="card">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Product Name
+                </th>
+                <th>
+                    Product Image
+                </th>
+                <th>
+                    Product Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td>
+                        <embed type="image/jpg" src="@Html.DisplayFor(modelIten => item.Product.ProductImage)" width="100" height="100" />
+                    </td>
+                    <td>
+                        R @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+                    </td>
+                    @*<td>
+                            <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (ViewBag.notification != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.notification");
+            };
+    </script>
+}
+
+
+<style>
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            border-color: black;
+        }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+    }
+</style>

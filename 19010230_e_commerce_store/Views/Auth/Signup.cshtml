@@ -3,14 +3,14 @@
 <br />
 <div class="text-center card">
     <h1>Sign Up</h1>
-    <form action="Auth/CreateAccount" method="post" class="text-center">
+    <form action="Signup" method="post" class="text-center">
         <br />
         <div class="container">
             <input class="text-center, form-control-lg" type="email" placeholder="Enter email" name="email" required />
         </div>
         <br />
         <div class="container">
-            <input class="text-center, form-control-lg" type="password" placeholder="Enter password" name="password" required />
+            <input class="text-center, form-control-lg" type="password" placeholder="Enter password" name="password" required min="6" />
         </div>
         <br />
         <div class="container">
@@ -27,8 +27,27 @@
 </div>
 <br />
 <div class="text-center">
-    <p style="color:red"><b>@ViewBag.alreadyExists</b></p> @*This might be a bad security feature*@
+    <p style="color:red"><b>@ViewBag.alreadyExists</b></p>
 </div>
 <div class="text-center">
     <p style="color:red"><b>@ViewBag.error</b></p>
 </div>
+
+<style>
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            border-color: black;
+        }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+    }
+</style>

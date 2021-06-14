@@ -25,9 +25,17 @@ namespace _19010230_e_commerce_store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>(); // Attribute @Sarina Till :)
             services.AddControllersWithViews();
             services.AddDbContext<prog7311Task2Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("database")));
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(15); // Session will get timed out after 15 minutes.
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +57,8 @@ namespace _19010230_e_commerce_store
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

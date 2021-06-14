@@ -13,7 +13,12 @@ namespace _19010230_e_commerce_store.Controllers
 {
     public class AuthController : Controller
     {
-        prog7311Task2Context db; // Instance prog7311Task2Context class which extends the DbContext class.
+        private readonly prog7311Task2Context _context;
+
+        public AuthController(prog7311Task2Context context)
+        {
+            _context = context;
+        }
 
         #region Login Methods
         public IActionResult Login()
@@ -35,16 +40,18 @@ namespace _19010230_e_commerce_store.Controllers
 
             try
             {
+                // Checking if the user already exists or not.
                 UserInfo checkIfExists = new UserInfo();
-                checkIfExists = await db.UserInfos.Where(x => x.UserEmail.Equals(email) && x.UserPassword.Equals(password)).SingleOrDefaultAsync();
+                checkIfExists = await _context.UserInfos.Where(x => x.UserEmail.Equals(email) && x.UserPassword.Equals(password)).SingleOrDefaultAsync();
                 if (checkIfExists is null)
                 {
-                    ViewBag.alreadyExists = "Invalid login credentials!";
-                    return View("Login");
+                    ViewBag.alreadyExists = "Invalid login credentials!"; // Standard login failed error message.
+                    return View("Login"); 
 
                 }
                 else
                 {
+                    HttpContext.Session.SetInt32("accessLevel", checkIfExists.UserType); // Determining the access level of the user.
                     HttpContext.Session.SetString("currentUser", email); // Settings the Session variable currentUser to the successfully loggged in user's email.
                                                                          // This will allow for the retrieval of user specific data throughout the application.
 
@@ -62,7 +69,6 @@ namespace _19010230_e_commerce_store.Controllers
 
 
         #region Signup Methods
-        [HttpGet]
         public IActionResult Signup()
         {
             return View();
@@ -85,16 +91,18 @@ namespace _19010230_e_commerce_store.Controllers
             {
                 // Checking if the username already exists.
                 UserInfo checkIfExists = new UserInfo();
-                checkIfExists = await db.UserInfos.Where(x => x.UserEmail.Equals(email)).SingleOrDefaultAsync();
+                checkIfExists = await _context.UserInfos.Where(x => x.UserEmail.Equals(email)).SingleOrDefaultAsync();
 
                 if (checkIfExists is null)
                 {
                     UserInfo u = new UserInfo();
                     u.UserEmail = email;
                     u.UserPassword = password;
-                    await db.UserInfos.AddAsync(u);
-                    await db.SaveChangesAsync();
+                    u.UserType = 0;
+                    await _context.UserInfos.AddAsync(u);
+                    await _context.SaveChangesAsync();
 
+                    HttpContext.Session.SetInt32("accessLevel", u.UserType); // Determining the access level of the user.
                     HttpContext.Session.SetString("currentUser", email); // Settings the Session variable currentUser to the successfully loggged in user's email.
                                                                          // This will allow for the retrieval of user specific data throughout the application.
 
@@ -114,6 +122,5 @@ namespace _19010230_e_commerce_store.Controllers
 
         }
         #endregion
-
     }
 }

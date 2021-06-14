@@ -24,12 +24,10 @@ namespace _19010230_e_commerce_store.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Can remove this just keep it for now.
-            /*if (!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-J3MQ5GHO\\SQLEXPRESS;Initial Catalog=prog7311Task2;Integrated Security=True");
-            }*/
+                // Connection string moved to appsettings.json
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,15 +37,11 @@ namespace _19010230_e_commerce_store.Models
             modelBuilder.Entity<OrderInfo>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
-                    .HasName("PK__orderInf__0809337D5AD9D6F1");
+                    .HasName("PK__orderInf__0809337D176BD5C2");
 
                 entity.ToTable("orderInfo");
 
                 entity.Property(e => e.OrderId).HasColumnName("orderID");
-
-                entity.Property(e => e.OrderDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("orderDate");
 
                 entity.Property(e => e.ProductId).HasColumnName("productID");
 
@@ -57,20 +51,22 @@ namespace _19010230_e_commerce_store.Models
                     .WithMany(p => p.OrderInfos)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orderInfo__produ__24927208");
+                    .HasConstraintName("FK__orderInfo__produ__3A81B327");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.OrderInfos)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orderInfo__userI__25869641");
+                    .HasConstraintName("FK__orderInfo__userI__3B75D760");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("product");
 
-                entity.Property(e => e.ProductId).HasColumnName("productID");
+                entity.Property(e => e.ProductId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("productID");
 
                 entity.Property(e => e.CategoryId).HasColumnName("categoryID");
 
@@ -100,17 +96,19 @@ namespace _19010230_e_commerce_store.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__categor__21B6055D");
+                    .HasConstraintName("FK__product__categor__2B3F6F97");
             });
 
             modelBuilder.Entity<ProductCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)
-                    .HasName("PK__productC__23CAF1F8406486F0");
+                    .HasName("PK__productC__23CAF1F8D0E2F80E");
 
                 entity.ToTable("productCategory");
 
-                entity.Property(e => e.CategoryId).HasColumnName("categoryID");
+                entity.Property(e => e.CategoryId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("categoryID");
 
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
